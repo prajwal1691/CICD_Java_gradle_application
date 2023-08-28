@@ -18,14 +18,6 @@ repositories {
     jcenter()
 }
 
-// Define project tasks
-task compileJava {
-    // Customize compilation options if needed
-}
-
-// Define additional tasks if needed
-// ...
-
 // Define the project's main source set
 sourceSets {
     main {
