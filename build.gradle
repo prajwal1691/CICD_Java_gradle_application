@@ -22,7 +22,7 @@ dependencies {
 }
 
 test {
-    reports.junitXml.destination = fileProperty("$buildDir/test-results/junit.xml")
+	useJUnitPlatform()
 }
 
 
