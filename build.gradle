@@ -23,10 +23,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    
-    // Configure test reports using 'getReports'
-    getReports().getJunitXml().setEnabled(true)
-    getReports().getJunitXml().setDestination(file("$buildDir/test-results/test"))
 }
 
 sonarqube {
