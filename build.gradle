@@ -1,38 +1,48 @@
+// Apply the Java plugin for compiling Java source code
 plugins {
-    id 'org.springframework.boot' version '2.5.4'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id 'war'
-    id 'org.sonarqube' version '3.3'
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+// Set the Java version
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-repositories {
-    mavenCentral()
-}
-
+// Define project dependencies
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // Example: Using the JUnit testing framework
+    testImplementation 'junit:junit:4.12'
 }
 
-test {
-    useJUnitPlatform()
-	reports {
-        junitXml.enabled = true
-        junitXml.destination = file("$buildDir/test-results/test")
+// Define project repositories (where Gradle should look for dependencies)
+repositories {
+    jcenter()
+}
+
+// Define project tasks
+task compileJava {
+    // Customize compilation options if needed
+}
+
+// Define additional tasks if needed
+// ...
+
+// Define the project's main source set
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/java'
+        }
     }
 }
 
-sonarqube {
-    properties {
-        property 'sonar.host.url', 'http://65.1.109.20:9000'
-        property 'sonar.login', '******'
-        property 'sonar.output.location', "$buildDir/sonarqube"
+// Define the project's test source set
+sourceSets {
+    test {
+        java {
+            srcDirs 'src/test/java'
+        }
     }
 }
+
+// Define the project's main class for running applications
+mainClassName = 'com.example.Main'
