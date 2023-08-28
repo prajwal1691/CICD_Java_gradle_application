@@ -30,6 +30,6 @@ sonarqube {
     properties {
         property 'sonar.host.url', 'http://65.1.109.20:9000'
         property 'sonar.login', '******'
-		property "sonar.report.export.paths", "$buildDir/sonar"
+		property "sonar.output.location", "$buildDir/sonar"
     }
 }
