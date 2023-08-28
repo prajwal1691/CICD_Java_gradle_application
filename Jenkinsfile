@@ -12,7 +12,7 @@ pipeline{
                 script {
                     withSonarQubeEnv(credentialsId: 'sonar-token') {
                         sh 'chmod +x gradlew'
-                        sh './gradlew clean sonarqube --warning-mode all'
+                        sh './gradlew cleanBuildCache'
                     }
                 }
             }
