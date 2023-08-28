@@ -23,11 +23,11 @@ dependencies {
 
 test {
     useJUnitPlatform()
-
-    // Update the test reporting configuration
+    
+    // Configure test reports
     reports {
         junitXml.enabled = true
-        testResultsDir = file("$buildDir/test-results/test")
+        junitXml.destination = file("$buildDir/test-results/test")
     }
 }
 
@@ -35,8 +35,6 @@ sonarqube {
     properties {
         property 'sonar.host.url', 'http://65.1.109.20:9000'
         property 'sonar.login', '******'
-        
-        // Update the SonarQube output location property
         property 'sonar.output.location', "$buildDir/sonarqube"
     }
 }
