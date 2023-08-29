@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment{
         VERSION = "${env.BUILD_ID}"
-        NEXUS_URL = 65.0.110.219:8081
-        DOCKER_HOSTED = 65.0.110.219:8083
+        NEXUS_URL = "65.0.110.219:8081"
+        DOCKER_HOSTED = "65.0.110.219:8083"
     } 
     stages{
         stage("sonar quality check") {
