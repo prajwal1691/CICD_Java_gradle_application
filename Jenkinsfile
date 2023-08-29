@@ -2,6 +2,8 @@ pipeline {
     agent any
     environment{
         VERSION = "${env.BUILD_ID}"
+        NEXUS_URL = 65.0.110.219:8081
+        DOCKER_HOSTED = 65.0.110.219:8083
     } 
     stages{
         stage("sonar quality check") {
@@ -27,10 +29,10 @@ pipeline {
                 script{
                     withCredentials([string(credentialsId: 'nexus_pass', variable: 'nexus_password')]) {
                         sh '''
-                          docker build -t 3.110.94.94:8083/springapp:${VERSION} .
-                          docker login -u admin -p $nexus_password 3.110.94.94:8083
-                          docker push 3.110.94.94:8083/springapp:${VERSION}
-                          docker rmi 3.110.94.94:8083/springapp:${VERSION}
+                          docker build -t ${DOCKER_HOSTED}/springapp:${VERSION} .
+                          docker login -u admin -p $nexus_password ${DOCKER_HOSTED}
+                          docker push ${DOCKER_HOSTED}/springapp:${VERSION}
+                          docker rmi ${DOCKER_HOSTED}/springapp:${VERSION}
                         '''
                     }
                 }
@@ -45,7 +47,7 @@ pipeline {
                              sh '''
                                  helmversion=$( helm show chart myapp | grep version | cut -d: -f 2 | tr -d ' ')
                                  tar -czvf  myapp-${helmversion}.tgz myapp/
-                                 curl -u admin:$nexus_password http://3.110.94.94:8081/repository/helm-hosted/ --upload-file myapp-${helmversion}.tgz -v
+                                 curl -u admin:$nexus_password http://${NEXUS_URL}/repository/helm-hosted/ --upload-file myapp-${helmversion}.tgz -v
                             '''
                           }
                     }
